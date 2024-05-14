@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<main>
+    <h1 class="form-header">Login to an existing account</h1>
+    {% if error %}
+        <p class="error-header">Error: {{ error }}</p>
+    {% endif %}
+    <form class="login-form" method="POST">
+        <input type="text" placeholder="Email or username..." name="email_or_username" id="email/username" required autocomplete="off">
+        <input type="password" placeholder="Password..." name="password" id="password" required>
+        <input type="submit" value="Login">
+    </form>
+</main>
+{% endblock %}

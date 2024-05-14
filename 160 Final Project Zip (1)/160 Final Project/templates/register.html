@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        <h1 class="form-header">Create an account</h1>
+            {% if error %}
+                <p class="error-header">Error: {{ error }}</p>
+            {% endif %}
+            {% if success %}
+                <p class="success-header">{{ success }}</p>
+            {% endif %}
+        <form method="POST" class="register-form">
+            <input type="text" placeholder="Email address..." name="email" id="email" required autocomplete="off">
+            <input type="text" placeholder="Username..." name="username" id="username" required autocomplete="off">
+            <input type="password" placeholder="Create your password..." name="password" id="password" required autocomplete="off">
+            <input type="password" placeholder="Confirm password..." name="password-confirm" id="password-confirm" required autocomplete="off">
+            <div class="radios">
+                <p>I am a...</p>
+                <input type="radio" name="radio" autocomplete="off" value="teacher" id="teacher-radio" required>
+                <label for="teacher-radio">Teacher</label>
+                <input type="radio" name="radio" autocomplete="off" value="student" id="student-radio" required>
+                <label for="student-radio">Student</label>
+            </div>
+            <input type="submit" value="Create account">
+        </form>
+    </main>
+{% endblock %}

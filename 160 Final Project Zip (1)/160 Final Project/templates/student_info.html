@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if acct_type == 'teacher' or acct_type == 'admin' %}
+            {% if tests_taken %}
+                <h1 class="form-header">Tests taken by {{ student }}</h1>
+                <div class="test-card">
+                    {% for test in tests_taken|unique %}
+                        <p>{{ test|join('') }} <a href="/students/{{ student }}/{{ test|join('') }}">View answers for this test</a></p>                   
+                    {% endfor %}
+                </div>
+            {% elif results %}
+                <h1 class="form-header">{{ student }} answers for {{ test|join('') }}</h1>
+                <div class="test-card">
+                    {% for result in results %}
+                        <p>{{ loop.index }}. {{ questions[loop.index - 1]|join('') }}</p>
+                        <p>{{ result['answer'] }}</p>                   
+                    {% endfor %}
+                    <form method="POST">
+                        <p>Grade: <input type="number" min="0" name="grade" required> / <input type="number" value="{{ questions|length }}" min="0" name="max-points" required></p>
+                        <input type="submit" value="Post grade">
+                    </form>
+                </div>
+            {% else %}
+                <p class="error-header">Error</p>
+            {% endif %}
+        {% else %}
+            <p class="error-header">Access denied</p>
+        {% endif %}
+    </main>
+{% endblock %}

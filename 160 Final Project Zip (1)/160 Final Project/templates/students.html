@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if acct_type == 'teacher' or acct_type == 'admin' %}
+            <div class="test-card">
+                {% if grades %}
+                    {% for grade in grades %}
+                        <p>{{ grade['test_name'] }} - Score: {{ grade['grade'] }} - Posted by {{ grade['graded_by'] }} on {{ grade['time_graded'] }}</p>
+                    {% endfor %}
+                {% elif students %}
+                    {% for student in students %}
+                        <p>{{ student['username'] }} <a href="/students/{{ student['username'] }}">View submissions</a> <a href="/students/grades/{{ student['username'] }}">View grades</a></p>
+                    {% endfor %}
+                {% else %}
+                    <p>No grades recorded</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="error-header">Access denied</p>
+        {% endif %}
+    </main>
+{% endblock %}

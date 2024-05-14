@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if acct_type == 'student' or acct_type == 'admin' %}
+            <form method="POST" class="test-card">
+                {% for question in questions %}
+                    <p class="question">{{ loop.index }}. {{ "".join(question) }}</p>
+                    <textarea placeholder="Your answer..." name="question-{{ loop.index }}" required autocomplete="off"></textarea>
+                {% endfor %}
+                <input type="submit" value="Submit Test">
+            </form>
+        {% else %}
+            <p class="error-header">Access denied</p>
+        {% endif %}
+    </main>
+{% endblock %}

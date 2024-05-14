@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if success %}
+            <p class="success-header">{{ success }}</p>
+        {% endif %}
+        <h1 class="welcome-msg">Hello! Please Choose an Option Below:</h1>
+        <div class="index-btns">
+            {% if loggedin %}
+                <figure id="login-btn" onclick="window.location.href='/login'">
+                    <p>Switch accounts</p>
+                </figure>
+                <figure id="register-btn" onclick="window.location.href='/register'">
+                    <p>Create account</p>
+                </figure>
+            {% else %}
+                <figure id="login-btn" onclick="window.location.href='/login'">
+                    <p>Login</p>
+                </figure>
+                <figure id="register-btn" onclick="window.location.href='/register'">
+                    <p>Register</p>
+                </figure>
+            {% endif %}
+            <figure id="test-btn" onclick="window.location.href='/tests'">
+                <p>Take a test</p>
+            </figure>
+            <figure id="manage-btn" onclick="window.location.href='/tests_and_grades'">
+                <p>Test info</p>
+            </figure>
+        </div>
+    </main>
+{% endblock %}

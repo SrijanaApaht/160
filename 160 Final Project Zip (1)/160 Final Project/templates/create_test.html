@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        <h1 class="form-header">Create a new test</h1>
+        {% if error %}
+            <p class="error-header">{{ error }}</p>
+        {% else %}
+            {% if acct_type == 'teacher' or acct_type == 'admin' %}
+            <form class="test-form new-test-form">
+                <div class="form-info-questions">
+                    <p class="new-test-question">Name of test</p>
+                    <input type="text" placeholder="..." id="test_name" name="test_name" required autocomplete="off">
+                    <p class="new-test-question">Number of questions</p>
+                    <input type="number" min="1" max="128" id="num_questions" name="num_questions" required>
+                    <input type="Submit" value="Create test">
+                </div>
+            </form>
+            {% else %}
+                <h2>Access denied</h2>
+            {% endif %}
+        {% endif %}
+    </main>
+    <script src="{{ url_for('static', filename='scripts/create_test.js') }}"></script>
+{% endblock %}

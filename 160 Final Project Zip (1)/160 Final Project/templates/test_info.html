@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        <h1 class="form-header">{{ test_vals['test_name'] }}</h1>
+        <div class="test-card">
+            <p>{{ test_vals['num_questions'] }} questions</p>
+            <p>Created on {{ test_vals['date_created'] }} by {{ test_vals['created_by'] }}</p>
+            <p>Taken by {{ num_of_students|join('') }} student(s)</p>
+            <h2>Grades:</h2>
+            {% if grades %}
+                {% for grade in grades %} 
+                    <p>{{ grade['student_name'] }} - Grade: {{ grade['grade'] }} - Graded on {{ grade['time_graded'] }}</p>
+                {% endfor %}
+            {% else %}
+                <p>No grades posted yet</p>
+            {% endif %}
+        </div>        
+    </main>
+{% endblock %}

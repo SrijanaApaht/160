@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if loggedin == test['created_by'] or acct_type == 'admin' %}
+            <form method="POST" class="test-card delete-card">
+                <p>WARNING - This action cannot be undone</p>
+                <div class="radios">
+                    <input type="radio" name="radio" autocomplete="off" value="nodelete" id="del-radio1" required>
+                    <label for="del-radio1">Cancel</label>
+                    <input type="radio" name="radio" autocomplete="off" value="delete" id="del-radio2" required>
+                    <label for="del-radio2">Delete</label>
+                    <input type="submit" value="Confirm">
+                </div>
+            </form>
+        {% else %}
+            <p class="error-header">Only the test creator or admins can delete this test</p>
+        {% endif %}
+    </main>
+{% endblock %}

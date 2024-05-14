@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+    <main>
+        {% if acct_type == 'student' %}
+            <h1 class="form-header">Test info and grades</h1>
+        {% else %}
+            <h1 class="form-header">Manage tests/grades</h1>
+        {% endif %}
+        <div class="test-card">
+            {% if acct_type == 'teacher' or acct_type == 'admin' %}
+                <button onclick="window.location.href='/create_new_test'">Create a new test</button>
+                <button onclick="window.location.href='/manage_grades'">View/grade student results</button>
+                {% for test in tests %}
+                    <p><a href="/update_tests/{{ test['test_name'] }}">[Modify]</a> <a href="/delete/{{ test['test_name'] }}">[Delete]</a> {{ test['test_name'] }} - Posted by: {{ test['created_by'] }} on {{ test['date_created'] }} <a href="tests/info/{{ test['test_name'] }}">Info</a></p>             
+                {% endfor %}
+            {% else %}
+                {% for test in tests %}  
+                    <a href="/tests/info/{{ test['test_name'] }}">{{ test['test_name'] }} - Posted by: {{ test['created_by'] }} on {{ test['date_created'] }}</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}
